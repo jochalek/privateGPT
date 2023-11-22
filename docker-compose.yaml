@@ -1,0 +1,15 @@
+services:
+  private-gpt:
+    build:
+      dockerfile: Dockerfile.external
+    volumes:
+      - ./local_data/:/home/worker/app/local_data
+      - ./models/:/home/worker/app/models
+    ports:
+      - 127.0.0.1:8091:8001
+    environment:
+      PORT: 8001
+      PGPT_PROFILES: docker
+      PGPT_MODE: hybrid
+    env_file:
+      - .env
